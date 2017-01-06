@@ -2,8 +2,9 @@ package tec_store.org.recyclerviewexample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        List<Mobile> mobileList = new ArrayList<>();
+        final List<Mobile> mobileList = new ArrayList<>();
 
         Mobile mobile = new Mobile();
         mobile.setMobileName("Nexus 6P");
@@ -62,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         mobile8.setMobileImage(R.drawable.img8);
 
 
-
         mobileList.add(mobile);
         mobileList.add(mobile2);
         mobileList.add(mobile3);
@@ -73,12 +73,45 @@ public class MainActivity extends AppCompatActivity {
         mobileList.add(mobile8);
 
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv);
-        MobileAdapter adapter = new MobileAdapter(mobileList,this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rv);
+        final MobileAdapter adapter = new MobileAdapter(mobileList, this);
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         recyclerView.setAdapter(adapter);
 
 
+        SearchView searchView = (SearchView) findViewById(R.id.search_view);
 
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (!newText.isEmpty()){
+                    List<Mobile> mobileSearchList = searchResult(mobileList,newText);
+                    MobileAdapter adapter1 = new MobileAdapter(mobileSearchList,MainActivity.this);
+                    adapter1.notifyDataSetChanged();
+                    recyclerView.setAdapter(adapter1);
+                }
+                else {
+                    recyclerView.setAdapter(adapter);
+                }
+                return false;
+            }
+        });
+
+
+    }
+
+    private List<Mobile> searchResult(List<Mobile> mobileList, String query) {
+        List<Mobile> tempList = new ArrayList<>();
+        for (int i = 0; i < mobileList.size(); i++) {
+            String mobileName = mobileList.get(i).getMobileName();
+            if (mobileName.contains(query))
+                tempList.add(mobileList.get(i));
+        }
+        return tempList;
     }
 }

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class MobileAdapter extends RecyclerView.Adapter<MobileAdapter.MobileHold
         holder.mobileManufacture.setText(mobile.getMobileManufacture());
         holder.mobileImg.setImageResource(mobile.getMobileImage());
 
-        holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context,DetailsActivity.class);
@@ -58,14 +58,14 @@ public class MobileAdapter extends RecyclerView.Adapter<MobileAdapter.MobileHold
     public class MobileHolder extends RecyclerView.ViewHolder {
         TextView mobileName, mobileManufacture;
         ImageView mobileImg;
-        RelativeLayout relativeLayout;
+        LinearLayout linearLayout;
 
         public MobileHolder(View itemView) {
             super(itemView);
             mobileName = (TextView) itemView.findViewById(R.id.mobile_name);
             mobileManufacture = (TextView) itemView.findViewById(R.id.manufacture);
             mobileImg = (ImageView) itemView.findViewById(R.id.mobile_img);
-            relativeLayout = (RelativeLayout) itemView.findViewById(R.id.relative_lo);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.linear_lo);
         }
     }
 }

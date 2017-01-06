@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/relative_lo"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_lo"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="10dp">
-
+    android:padding="10dp"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/mobile_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
         android:scaleType="fitCenter"
         android:src="@drawable/img1" />
+
 
     <TextView
         android:id="@+id/mobile_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@id/mobile_img"
+        android:layout_gravity="center"
         android:text="Nexus 6P"
         android:textColor="@android:color/black" />
 
@@ -29,15 +27,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mobile_name"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/mobile_img"
+        android:paddingBottom="4dp"
         android:text="Huawei" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@id/mobile_img"
-        android:background="#e1e1e1" />
-
-</RelativeLayout>
+</LinearLayout>
